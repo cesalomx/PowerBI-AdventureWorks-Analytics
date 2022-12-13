@@ -1,0 +1,51 @@
+# SQL Views
+
+Foobar is a Python library for dealing with word pluralization.
+
+## Usage
+
+```
+USE [AdventureWorks2019]
+
+go
+
+/****** Object:  View [dbo].[Compras_PowerBI]    Script Date: 13/12/22 05:28:35 p. m. ******/
+SET ansi_nulls ON
+
+go
+
+SET quoted_identifier ON
+
+go
+
+ALTER VIEW [dbo].[Compras_PowerBI]
+AS
+  SELECT a.purchaseorderid             AS OrderID,
+         b.orderdate,
+         b.shipdate,
+         a.duedate,
+         a.productid,
+         d.NAME                        AS DescriptionName,
+         a.orderqty                    AS RequestedQuantity,
+         -- Changed to requested quantity on 01/Oct/2022
+         a.receivedqty,
+         a.rejectedqty                 AS ReturnedQty,
+         a.unitprice,
+         a.linetotal                   AS Total,
+         b.vendorid,
+         e.NAME                        AS Vendor,
+         c.averageleadtime,
+         Dense_rank()
+           OVER(
+             ORDER BY a.orderqty DESC) AS RequestedRank
+  FROM   purchasing.purchaseorderdetail AS a
+         INNER JOIN purchasing.purchaseorderheader AS b
+                 ON a.purchaseorderid = b.purchaseorderid
+         INNER JOIN purchasing.productvendor AS c
+                 ON a.productid = c.productid
+         INNER JOIN production.product AS d
+                 ON c.productid = d.productid
+         INNER JOIN purchasing.vendor AS e
+                 ON b.vendorid = e.businessentityid 
+
+```
