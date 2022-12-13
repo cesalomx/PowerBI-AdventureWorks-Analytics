@@ -8,6 +8,8 @@ https://app.powerbi.com/view?r=eyJrIjoiNWM1MTNiMDgtODk3OS00NWZkLTgxZDEtNDZjMGZjZ
 
 ![Adventure_Works_Analysis](https://user-images.githubusercontent.com/63975528/207407556-2ba3e987-db6d-4ed7-94ca-b8c419352b2e.jpg)
 
+![Sales_](https://user-images.githubusercontent.com/63975528/207457889-22c9ec33-16bf-4a6c-96ec-6c12a2594593.jpg)
+
 
 ## Read me
 
