@@ -1,4 +1,6 @@
-## Power BI Report - DataAnalytics AdventureWorks
+# Power BI Report - DataAnalytics AdventureWorks 2019
+
+This report is consuming the data from SQL Views in SQL Server, which you can also find in this repository. 
 
 Use the following Link to see my Power BI Project: 
 ```bash
@@ -11,6 +13,4 @@ https://app.powerbi.com/view?r=eyJrIjoiNWM1MTNiMDgtODk3OS00NWZkLTgxZDEtNDZjMGZjZ
 ![Sales_](https://user-images.githubusercontent.com/63975528/207457889-22c9ec33-16bf-4a6c-96ec-6c12a2594593.jpg)
 
 
-## Read me
 
-This report is consuming the data from SQL Views in SQL Server which I'll be adding to this repository shortly
