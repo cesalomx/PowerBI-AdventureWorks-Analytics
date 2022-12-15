@@ -30,7 +30,7 @@ AS
          c.averageleadtime,
          Dense_rank()
            OVER(
-             ORDER BY a.orderqty DESC) AS RequestedRank
+             ORDER BY a.orderqty DESC) AS RequestedRank -- Creating the RequestedRank Column to rank orders based on the RequestedQuantity Column (orderqty)
   FROM   purchasing.purchaseorderdetail AS a
          INNER JOIN purchasing.purchaseorderheader AS b
                  ON a.purchaseorderid = b.purchaseorderid
