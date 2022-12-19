@@ -4,42 +4,67 @@ go
 
 SET ansi_nulls ON
 
-go
+USE [AdventureWorks2019]
+GO
 
-SET quoted_identifier ON
+/****** Object:  View [dbo].[Compras_PowerBI]    Script Date: 19/12/22 04:31:42 p. m. ******/
+SET ANSI_NULLS ON
+GO
 
-go
+SET QUOTED_IDENTIFIER ON
+GO
 
--- [Purchasing_PowerBI]
-ALTER VIEW [dbo].[Purchasing_PowerBI]
-AS
-  SELECT a.purchaseorderid             AS OrderID,
-         b.orderdate,
-         b.shipdate,
-         a.duedate,
-         a.productid,
-         d.NAME                        AS DescriptionName,
-         a.orderqty                    AS RequestedQuantity,
-         -- Changed to requested quantity on 01/Oct/2022
-         a.receivedqty,
-         a.rejectedqty                 AS ReturnedQty,
-         a.unitprice,
-         a.linetotal                   AS Total,
-         b.vendorid,
-         e.NAME                        AS Vendor,
-         c.averageleadtime,
-         Dense_rank()
-           OVER(
-             ORDER BY a.orderqty DESC) AS RequestedRank -- Creating the RequestedRank Column to rank orders based on the RequestedQuantity Column (orderqty)
-  FROM   purchasing.purchaseorderdetail AS a
-         INNER JOIN purchasing.purchaseorderheader AS b
-                 ON a.purchaseorderid = b.purchaseorderid
-         INNER JOIN purchasing.productvendor AS c
-                 ON a.productid = c.productid
-         INNER JOIN production.product AS d
-                 ON c.productid = d.productid
-         INNER JOIN purchasing.vendor AS e
-                 ON b.vendorid = e.businessentityid
+
+ALTER VIEW [dbo].[Compras_PowerBI] AS
+
+WITH purchasing
+     AS (SELECT a.purchaseorderid                  AS OrderID,
+                Format(b.orderdate, 'dd/MM/yyyy')  AS OrderDate,
+                Format(b.shipdate, 'dd/MM/yyyy')   AS ShipDate,
+                Format(a.duedate, 'dd/MM/yyyy')    AS DueDate,
+                a.productid,
+                d.NAME                             AS DescriptionName,
+                a.orderqty                         AS RequestedQuantity,
+                -- Changed to requested quantity on 01/Oct/2022
+                a.receivedqty,
+                a.rejectedqty                      AS ReturnedQty,
+                a.unitprice,
+                a.linetotal                        AS Total,
+                b.vendorid,
+                e.NAME                             AS Vendor,
+                c.averageleadtime,
+                Dense_rank()
+                  OVER(
+                    ORDER BY a.orderqty DESC)      AS RequestedRank,
+                Datediff(day, orderdate, shipdate) AS Duration,
+                CASE
+                  WHEN shipdate <= duedate THEN 'Yes'
+                  ELSE 'No'
+                END                                AS DeliveryFulfillmentTime,
+                CASE
+                  WHEN receivedqty = a.orderqty THEN 'Yes'
+                  ELSE 'No'
+                END                                AS DeliveryFulfillment
+         FROM   purchasing.purchaseorderdetail AS a
+                INNER JOIN purchasing.purchaseorderheader AS b
+                        ON a.purchaseorderid = b.purchaseorderid
+                INNER JOIN purchasing.productvendor AS c
+                        ON a.productid = c.productid
+                INNER JOIN production.product AS d
+                        ON c.productid = d.productid
+                INNER JOIN purchasing.vendor AS e
+                        ON b.vendorid = e.businessentityid),
+     purchasing_cte
+     AS (SELECT *,
+                CASE
+                  WHEN duration <= averageleadtime THEN 'Yes'
+                  ELSE 'No'
+                END AS LeadTime
+         FROM   purchasing)
+SELECT *
+FROM   purchasing_cte 
+
+
 
 go
 
