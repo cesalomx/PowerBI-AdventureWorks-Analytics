@@ -4,7 +4,7 @@ This report is consuming the data from SQL Views in SQL Server, which you can al
 
 Use the following Link to see my Power BI Project: 
 ```bash
-https://app.powerbi.com/view?r=eyJrIjoiNWM1MTNiMDgtODk3OS00NWZkLTgxZDEtNDZjMGZjZTJlMTRkIiwidCI6IjdjMGMzNmY1LWFmODMtNGMyNC04ODQ0LTk5NjJlMDE2MzcxOSIsImMiOjEwfQ%3D%3D&pageName=ReportSection70ca0e24e15d70ab3812.
+https://app.powerbi.com/view?r=eyJrIjoiMTllYTM3NGMtNjM1NC00NzQ4LTg0ZTgtY2NiOGRiMjBlNzRkIiwidCI6IjdjMGMzNmY1LWFmODMtNGMyNC04ODQ0LTk5NjJlMDE2MzcxOSIsImMiOjEwfQ%3D%3D
 
 ```
 ![image](https://user-images.githubusercontent.com/63975528/210276565-cec7c0da-83c5-4834-9061-b7c62c7658c1.png)
