@@ -15,3 +15,4 @@ https://app.powerbi.com/view?r=eyJrIjoiMTllYTM3NGMtNjM1NC00NzQ4LTg0ZTgtY2NiOGRiM
 
 
 
+AdventureWorks2019 is a sample database provided by Microsoft. It is a fictional company that sells bikes and accessories, and is used to demonstrate how to design and use a SQL Server database. The database contains a wide range of data, including information about products, customers, employees, vendors, and sales orders. It is intended to be used as a learning and training tool for database professionals, and is commonly used in demonstrations and examples of SQL queries and database design.
